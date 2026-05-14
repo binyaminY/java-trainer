@@ -570,11 +570,11 @@ function shuffle(arr){ const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=M
 function pick(arr,n){ return shuffle(arr).slice(0,Math.min(n,arr.length)); }
 
 const C = {
-  bg:"#070d1a", card:"#0f1829", cardH:"#162035",
-  border:"#1a2d4a", border2:"#253d5c",
-  text:"#e8f0ff", muted:"#7a90b0", dim:"#405070",
-  green:"#22c55e", red:"#ef4444", yellow:"#f59e0b",
-  java:"#f89820", orange:"#f97316",
+  bg:"#f0f6ff", card:"#ffffff", cardH:"#e8f0fd",
+  border:"#d0dff0", border2:"#b0c8e8",
+  text:"#1a2540", muted:"#4a6080", dim:"#8aa0bc",
+  green:"#16a34a", red:"#dc2626", yellow:"#b45309",
+  java:"#c96a00", orange:"#ea580c",
 };
 
 const FONT = "'JetBrains Mono','Fira Code',monospace";
@@ -604,7 +604,7 @@ function CodeBlock({ code }) {
   const lines = code.split("\n");
   return (
     <pre style={{
-      background:"#020810", border:`1px solid #1e3a5f`,
+      background:"#1a2535", border:`1px solid #2d4060`,
       borderRadius:10, padding:"1rem", margin:"0.8rem 0",
       overflowX:"auto", fontFamily:FONT, fontSize:13,
       lineHeight:1.7, textAlign:"left", direction:"ltr",
@@ -613,7 +613,7 @@ function CodeBlock({ code }) {
         const isBug = line.includes("// 🐛") || line.includes("// שני threads");
         return (
           <div key={i} style={{
-            background: isBug ? "rgba(239,68,68,0.12)" : "transparent",
+            background: isBug ? "rgba(220,38,38,0.10)" : "transparent",
             borderLeft: isBug ? `3px solid ${C.red}` : "3px solid transparent",
             paddingLeft:6, marginLeft:-6,
           }}>
@@ -691,7 +691,7 @@ function HomeScreen({ onStart }) {
         <div style={{ display:"inline-block", background:"rgba(248,152,32,.1)", border:"1px solid rgba(248,152,32,.35)", borderRadius:100, padding:"4px 18px", fontSize:11, color:C.java, letterSpacing:".12em", marginBottom:".9rem" }}>
           ☕ JAVA INTERACTIVE TRAINER
         </div>
-        <h1 style={{ fontSize:"clamp(1.7rem,4vw,2.5rem)", fontWeight:900, lineHeight:1.1, marginBottom:".6rem", background:`linear-gradient(135deg,${C.text},#60a5fa)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
+        <h1 style={{ fontSize:"clamp(1.7rem,4vw,2.5rem)", fontWeight:900, lineHeight:1.1, marginBottom:".6rem", background:`linear-gradient(135deg,#1a2540,#2563eb)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
           למד Java תוך כדי משחק
         </h1>
         <p style={{ color:C.muted, fontSize:13, maxWidth:480, margin:"0 auto" }}>
@@ -707,10 +707,10 @@ function HomeScreen({ onStart }) {
             <div key={k} onClick={() => setTopic(s?null:k)}
               onMouseEnter={() => setHover(k)} onMouseLeave={() => setHover(null)}
               style={{
-                background: s ? `${t.color}18` : hover===k ? C.cardH : C.card,
+                background: s ? `${t.color}12` : hover===k ? C.cardH : C.card,
                 border: `1.5px solid ${s ? t.color : hover===k ? C.border2 : C.border}`,
                 borderRadius:14, padding:"1rem", cursor:"pointer", transition:"all .18s",
-                boxShadow: s ? `0 0 18px ${t.color}22` : "none",
+                boxShadow: s ? `0 4px 20px ${t.color}30` : hover===k ? "0 4px 16px rgba(0,0,0,0.08)" : "0 2px 8px rgba(0,0,0,0.05)",
                 position:"relative", overflow:"hidden"
               }}>
               {isBug && <div style={{ position:"absolute",top:6,right:8,fontSize:9,color:C.orange,background:"rgba(249,115,22,.15)",border:"1px solid rgba(249,115,22,.3)",borderRadius:4,padding:"1px 6px",letterSpacing:".08em" }}>NEW</div>}
@@ -755,7 +755,7 @@ function HomeScreen({ onStart }) {
       )}
 
       <button onClick={() => topic && onStart({ topic, count, diff })} disabled={!topic}
-        style={{ width:"100%", padding:"1rem", background:topic?`linear-gradient(135deg,${sel?.color||"#3b82f6"},#8b5cf6)`:"#1a2d4a", border:"none", borderRadius:14, color:topic?C.text:C.dim, fontFamily:FONT, fontWeight:800, fontSize:15, cursor:topic?"pointer":"not-allowed", transition:"all .2s", letterSpacing:".04em" }}>
+        style={{ width:"100%", padding:"1rem", background:topic?`linear-gradient(135deg,${sel?.color||"#3b82f6"},#8b5cf6)`:"#d0dff0", border:"none", borderRadius:14, color:topic?"#fff":C.dim, fontFamily:FONT, fontWeight:800, fontSize:15, cursor:topic?"pointer":"not-allowed", transition:"all .2s", letterSpacing:".04em" }}>
         {topic ? "🚀 התחל חידון" : "← בחר נושא כדי להתחיל"}
       </button>
       <div style={{ textAlign:"center", fontSize:11, color:C.dim, marginTop:"1rem" }}>
@@ -789,7 +789,7 @@ function QuizScreen({ config, onFinish, onHome }) {
     <div style={{ maxWidth:700, margin:"0 auto", padding:"3rem 1rem", textAlign:"center", fontFamily:FONT, color:C.text }}>
       <div style={{ fontSize:40, marginBottom:"1rem" }}>😅</div>
       <p style={{ color:C.muted }}>אין שאלות זמינות לרמת הקושי שנבחרה.</p>
-      <button onClick={onHome} style={{ marginTop:"1rem", padding:".8rem 2rem", background:"none", border:`1px solid ${C.border}`, borderRadius:12, color:C.muted, cursor:"pointer", fontFamily:FONT }}>← חזרה</button>
+      <button onClick={onHome} style={{ marginTop:"1rem", padding:".8rem 2rem", background:"#fff", border:`1px solid ${C.border}`, borderRadius:12, color:C.muted, cursor:"pointer", fontFamily:FONT }}>← חזרה</button>
     </div>
   );
 
@@ -843,9 +843,9 @@ function QuizScreen({ config, onFinish, onHome }) {
           const isC=i===correctIdx, isS=i===selected;
           let bg=C.card, border=C.border, color=C.text;
           if (revealed) {
-            if (isC) { bg="rgba(34,197,94,.1)"; border=C.green; color=C.green; }
-            else if (isS) { bg="rgba(239,68,68,.1)"; border=C.red; color=C.red; }
-          } else if (isS) { bg="rgba(59,130,246,.1)"; border="#3b82f6"; color="#3b82f6"; }
+            if (isC) { bg="rgba(22,163,74,.08)"; border=C.green; color=C.green; }
+            else if (isS) { bg="rgba(220,38,38,.08)"; border=C.red; color=C.red; }
+          } else if (isS) { bg="rgba(37,99,235,.08)"; border="#2563eb"; color="#2563eb"; }
           return (
             <div key={i} onClick={() => choose(i)}
               style={{ background:bg, border:`1px solid ${border}`, borderRadius:12, padding:".85rem 1.1rem", cursor:revealed?"default":"pointer", color, fontFamily:FONT, fontSize:14, display:"flex", alignItems:"flex-start", gap:".8rem", transition:"all .14s", direction:"rtl" }}>
@@ -860,8 +860,8 @@ function QuizScreen({ config, onFinish, onHome }) {
 
       {/* Explanation */}
       {revealed && (
-        <div style={{ background:"rgba(59,130,246,.07)", border:"1px solid rgba(59,130,246,.2)", borderRadius:12, padding:"1rem 1.2rem", marginBottom:"1rem", direction:"rtl", textAlign:"right" }}>
-          <div style={{ fontSize:11, color:"#60a5fa", marginBottom:6, letterSpacing:".1em" }}>💡 הסבר</div>
+        <div style={{ background:"rgba(37,99,235,.06)", border:"1px solid rgba(37,99,235,.2)", borderRadius:12, padding:"1rem 1.2rem", marginBottom:"1rem", direction:"rtl", textAlign:"right" }}>
+          <div style={{ fontSize:11, color:"#2563eb", marginBottom:6, letterSpacing:".1em" }}>💡 הסבר</div>
           <p style={{ margin:0, fontSize:13, color:C.muted, lineHeight:1.75 }}>{q.explain}</p>
         </div>
       )}
@@ -905,7 +905,7 @@ function ScoreScreen({ config, result, onRetry, onHome }) {
         <div style={{ marginBottom:"1.5rem" }}>
           <h3 style={{ fontSize:14, color:C.red, marginBottom:".8rem", direction:"rtl" }}>❌ שאלות שהחמצת ({wrongs.length})</h3>
           {wrongs.map((w,i) => (
-            <div key={i} style={{ background:"rgba(239,68,68,.06)", border:"1px solid rgba(239,68,68,.2)", borderRadius:10, padding:".9rem", marginBottom:8, direction:"rtl", textAlign:"right" }}>
+            <div key={i} style={{ background:"rgba(220,38,38,.06)", border:"1px solid rgba(220,38,38,.2)", borderRadius:10, padding:".9rem", marginBottom:8, direction:"rtl", textAlign:"right" }}>
               <div style={{ fontSize:13, color:C.text, marginBottom:4 }}>{w.q}</div>
               {w.code && <div style={{ fontSize:11, color:C.dim, marginBottom:6 }}>📋 שאלת קוד</div>}
               <div style={{ fontSize:12, color:C.green }}>✓ {w.correct}</div>
@@ -920,7 +920,7 @@ function ScoreScreen({ config, result, onRetry, onHome }) {
           🔁 סיבוב נוסף עם אותן הגדרות
         </button>
         <button onClick={onHome}
-          style={{ padding:".9rem", background:"none", border:`1px solid ${C.border}`, borderRadius:12, color:C.muted, fontFamily:FONT, fontSize:14, cursor:"pointer" }}>
+          style={{ padding:".9rem", background:"#fff", border:`1px solid ${C.border}`, borderRadius:12, color:C.muted, fontFamily:FONT, fontSize:14, cursor:"pointer" }}>
           ← בחר נושא / הגדרות אחרות
         </button>
       </div>
@@ -937,7 +937,7 @@ export default function App() {
 
   return (
     <div style={{ minHeight:"100vh", background:C.bg, fontFamily:FONT }}>
-      <header style={{ background:`linear-gradient(90deg,${C.card},#0a0f1e)`, borderBottom:`1px solid ${C.border}`, padding:".8rem 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+      <header style={{ background:`linear-gradient(90deg,#ffffff,#f0f6ff)`, borderBottom:`1px solid ${C.border}`, padding:".8rem 1.5rem", display:"flex", alignItems:"center", justifyContent:"space-between", boxShadow:"0 1px 8px rgba(0,0,0,0.06)" }}>
         <div style={{ fontSize:18, fontWeight:700, color:C.java }}>☕ Java<span style={{ color:C.muted, fontWeight:400 }}>Trainer</span></div>
         <div style={{ fontSize:11, color:C.dim }}>{total} שאלות • 7 נושאים</div>
       </header>
